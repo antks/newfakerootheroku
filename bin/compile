@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
-apt-get install aria2
 set -e
 
 mktmpdir() {
