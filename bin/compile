@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 set -e
-pip install gdown
 mktmpdir() {
   dir=$(mktemp -t fakesu-$1-XXXX)
   rm -rf $dir
