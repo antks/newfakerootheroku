@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 set -e
-
+pip install gdown
 mktmpdir() {
   dir=$(mktemp -t fakesu-$1-XXXX)
   rm -rf $dir
@@ -32,18 +32,11 @@ export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/d
 export DEBOOTSTRAP_DIR=$CACHE_DIR/.tools/debootstrap/usr/share/debootstrap
 
 echo "-----> Fetching and installing wget"
-cd $WGET_BUILD
-curl -O http://ftp.gnu.org/gnu/wget/wget-1.13.4.tar.bz2 
-tar jxvf wget-1.13.4.tar.bz2
-cd wget-1.13.4
-./configure --prefix=$CACHE_DIR/.tools/wget --without-ssl 
-make 
-make install 
-echo "wget installed" | indent
+
 
 echo "-----> Fetching and installing debootstrap"
 cd $DEBOOTSTRAP_BUILD
-wget http://archive.ubuntu.com/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.59.tar.xz 
+curl -O http://archive.ubuntu.com/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.59.tar.xz 
 tar zxvf debootstrap_1.0.59.tar.xz 
 cd debootstrap_1.0.59
 DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make >/dev/null
